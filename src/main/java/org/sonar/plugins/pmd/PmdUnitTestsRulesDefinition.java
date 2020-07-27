@@ -1,7 +1,7 @@
 /*
  * SonarQube PMD Plugin
- * Copyright (C) 2012 SonarSource
- * sonarqube@googlegroups.com
+ * Copyright (C) 2012-2019 SonarSource SA
+ * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -13,29 +13,29 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 package org.sonar.plugins.pmd;
 
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.plugins.java.Java;
+import org.sonar.plugins.pmd.PmdConstants;
 
 public final class PmdUnitTestsRulesDefinition implements RulesDefinition {
 
-  public PmdUnitTestsRulesDefinition() {
-    // Do nothing
-  }
+    public PmdUnitTestsRulesDefinition() {
+        // Do nothing
+    }
 
-  @Override
-  public void define(Context context) {
-    NewRepository repository = context
-      .createRepository(PmdConstants.TEST_REPOSITORY_KEY, Java.KEY)
-      .setName(PmdConstants.TEST_REPOSITORY_NAME);
+    @Override
+    public void define(Context context) {
+        NewRepository repository = context
+                .createRepository(PmdConstants.TEST_REPOSITORY_KEY, PmdConstants.LANGUAGE_KEY)
+                .setName(PmdConstants.TEST_REPOSITORY_NAME);
 
-    PmdRulesDefinition.extractRulesData(repository, "/org/sonar/plugins/pmd/rules-unit-tests.xml", "/org/sonar/l10n/pmd/rules/pmd-unit-tests");
+        PmdRulesDefinition.extractRulesData(repository, "/org/sonar/plugins/pmd/rules-unit-tests.xml", "/org/sonar/l10n/pmd/rules/pmd-unit-tests");
 
-    repository.done();
-  }
+        repository.done();
+    }
 }
